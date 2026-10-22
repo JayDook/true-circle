@@ -1,0 +1,95 @@
+{
+ "bg_top": [
+  12,
+  4,
+  28
+ ],
+ "bg_bottom": [
+  30,
+  5,
+  45
+ ],
+ "glow": [
+  220,
+  40,
+  200
+ ],
+ "glow_alpha": 70,
+ "particles": {
+  "style": "dots",
+  "color": [
+   0,
+   240,
+   255
+  ],
+  "count": 60
+ },
+ "decorations": [
+  "skyline"
+ ],
+ "deco_color": [
+  8,
+  2,
+  18
+ ],
+ "deco_color2": [
+  0,
+  240,
+  255
+ ],
+ "ring_inner": [
+  255,
+  40,
+  200
+ ],
+ "ring_outer": [
+  0,
+  230,
+  255
+ ],
+ "center_border": [
+  255,
+  255,
+  255
+ ],
+ "lurker": [
+  160,
+  90,
+  255
+ ],
+ "halo": [
+  8,
+  2,
+  18
+ ],
+ "title": [
+  255,
+  60,
+  210
+ ],
+ "title_outline": [
+  8,
+  2,
+  18
+ ],
+ "subtitle": [
+  170,
+  250,
+  255
+ ],
+ "accent": [
+  0,
+  230,
+  255
+ ],
+ "tag_bg": [
+  25,
+  5,
+  40
+ ],
+ "tag_text": [
+  170,
+  250,
+  255
+ ]
+}
