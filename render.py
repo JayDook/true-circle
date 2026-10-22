@@ -1,5 +1,5 @@
 # True Circle by @JayDook (MIT). https://github.com/JayDook/true-circle
-# Usage: render.py --list out/list.json --handle <handle> --out out/inner-circle.png [--theme NAME|surprise|theme.json]
+# Usage: render.py --list out/list.json --handle <handle> [--flavor classic|fans|mutuals] [--days 15|30|60] --out out/inner-circle.png [--theme NAME|surprise|theme.json]
 # Avatars: <username>.jpg next to list.json. Rings 8/16/27; edit `rings` to change counts.
 # THEMES: --theme takes a preset name (see PRESETS), 'surprise' (default: random non-halloween preset,
 #   or halloween during October), or a path to a JSON file. Missing JSON keys fall back to 'space'.
@@ -14,7 +14,7 @@
 #   title, title_outline, subtitle, accent          title text, its outline, flavor label, flavor side lines
 #   tag_bg, tag_text         bottom-left handle tag
 import json,math,random,argparse,os
-ap=argparse.ArgumentParser();ap.add_argument('--list',default='list.json');ap.add_argument('--handle',default='');ap.add_argument('--out',default='inner-circle.png');ap.add_argument('--flavor',choices=['classic','fans','mutuals'],default='classic',help='title label at top center');ap.add_argument('--notitle',action='store_true');ap.add_argument('--lurkers',help='optional lurkers.json: extra outer ring of quiet likers');ap.add_argument('--theme',default='surprise',help='preset name, surprise, or theme.json');ap.add_argument('--font',help='path to a bold .ttf (default: DejaVuSans-Bold, then Arial Bold, then Pillow default)');A=ap.parse_args();AV=os.path.dirname(os.path.abspath(A.list))
+ap=argparse.ArgumentParser();ap.add_argument('--list',default='list.json');ap.add_argument('--handle',default='');ap.add_argument('--out',default='inner-circle.png');ap.add_argument('--flavor',choices=['classic','fans','mutuals'],default='classic',help='title label at top center');ap.add_argument('--notitle',action='store_true');ap.add_argument('--lurkers',help='optional lurkers.json: extra outer ring of quiet likers');ap.add_argument('--theme',default='surprise',help='preset name, surprise, or theme.json');ap.add_argument('--days',type=int,choices=[15,30,60],help='lookback window shown in the subtitle, e.g. Classic · Last 30 days');ap.add_argument('--font',help='path to a bold .ttf (default: DejaVuSans-Bold, then Arial Bold, then Pillow default)');A=ap.parse_args();AV=os.path.dirname(os.path.abspath(A.list))
 from PIL import Image,ImageDraw,ImageFont,ImageFilter
 W=1200;C=600;S=2  # supersample
 PRESETS={
@@ -153,7 +153,7 @@ for j,(c,fc) in enumerate([((255,200,40),(90,60,0)),((205,210,220),(60,60,70)),(
 if T:
     d.text((C*S,48*S),'INNER CIRCLE',font=F(40),fill=TH['title_outline'],anchor='mm',stroke_width=6*S,stroke_fill=TH['title_outline'])
     d.text((C*S,48*S),'INNER CIRCLE',font=F(40),fill=TH['title'],anchor='mm')
-    fl={'classic':'Classic','fans':'Fans','mutuals':'Mutuals'}[A.flavor]
+    fl={'classic':'Classic','fans':'Fans','mutuals':'Mutuals'}[A.flavor]+(' · Last %d days'%A.days if A.days else '')
     tw=d.textlength(fl,font=F(22))/S
     for sx in (-1,1): d.line([((C+sx*(tw/2+14))*S,90*S),((C+sx*(tw/2+64))*S,90*S)],fill=TH['accent'],width=2*S)
     d.text((C*S,90*S),fl,font=F(22),fill=TH['subtitle'],anchor='mm',stroke_width=3*S,stroke_fill=TH['title_outline'])

@@ -39,11 +39,12 @@ python3 score.py --me <id> --data data --likes likes --flavor mutuals --out out_
    This writes `out/list.json` (you first, then the ranked accounts), `evidence.json` (why each person ranked where they did) and, for fans, `lurkers.json`.
 3. Put the avatars next to `list.json` as `<username>.jpg`. The `img` URLs in `list.json` are where to download them from. Then render:
 ```bash
-python3 render.py --list out/list.json --handle yourhandle --out circle.png
-python3 render.py --list out_fans/list.json --lurkers out_fans/lurkers.json --flavor fans --handle yourhandle --theme neon --out fans.png
+python3 render.py --list out/list.json --handle yourhandle --days 30 --out circle.png
+python3 render.py --list out_fans/list.json --lurkers out_fans/lurkers.json --flavor fans --days 30 --handle yourhandle --theme neon --out fans.png
 ```
    Options:
    - `--flavor classic|fans|mutuals` sets the title label.
+   - `--days 15|30|60` adds the lookback window to the subtitle ("Classic · Last 30 days"). Leave it out and the subtitle shows only the flavor.
    - `--notitle` hides the title.
    - `--font path.ttf` sets a bold font.
    - `--theme` picks the look (see below).
